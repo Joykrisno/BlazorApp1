@@ -18,7 +18,7 @@ namespace BlazorApp1
             builder.Services.AddSingleton<EmpService>();
             builder.Services.AddHttpClient<IEmpService,EmpService>(client =>
             {
-                client.BaseAddress = new Uri("http://localhost:5196/");
+                client.BaseAddress = new Uri("https://localhost:5196/api/");
             });
 
             var app = builder.Build();
