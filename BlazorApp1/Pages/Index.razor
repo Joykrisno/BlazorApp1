@@ -2,33 +2,55 @@
 @using DamoModels.CustomModels;
 @using BlazorApp1.Services;
 @inject IEmpService empservice;
+@inject IJSRuntime JSRuntime;
 
 <PageTitle>Index</PageTitle>
+<div class="container">
+    <EditForm Model="@employe">
+        <table class="table table-striped table-bordered">
+            <tr>
+                <td>Name</td>
+                <td>Company</td>
+                <td>YearoffExprience</td>          
+            </tr>
+            <tr>
+                <td>
+                    <InputText @bind-Value="employe.Name" class="form-control" />
+                </td>
+                <td>
+                    <InputText @bind-Value="employe.Company" class="form-control" />
+                </td>
+                <td>
+                    <InputText @bind-Value="employe.YearoffExprience" class="form-control" />
+                </td>
+                <td>
+                    <input type="button" class="btn btn-primary" value="Add" @onclick="AddNewEmploye" />
+                </td>
+            </tr>
+        </table>
+    </EditForm>
+</div>
 
-<EditForm Model="@employe">
-    <table class="table table-striped table-bordered bg-light">
-        <tr>
-            <td>
-                <InputText @bind-Value="employe.Name" class="form-control" />
-            </td>
-            <td>
-                <InputText @bind-Value="employe.Company" class="form-control" />
-            </td>
-            <td>
-                <InputText @bind-Value="employe.YearoffExprience" class="form-control" />
-            </td>
-            <td>
-                <input type="button" class="btn btn-primary" value="Add" @onclick="AddNewEmploye" />
-            </td>
-        </tr>
-    </table>
-</EditForm>
 
 @code{
 
     private Employe employe = new Employe();
 
-    public void AddNewEmploye(){
+    public async void AddNewEmploye()
+    {
+        var response = await empservice.AddNewEmploye(employe);
 
+        if(response !=null)
+        {
+            await alert("Employe Add Successfully");
+        }
+
+
+     
+    }
+
+    private async Task alert(string Message)
+    {
+        await JSRuntime.InvokeAsync<object>("alert", Message);
     }
 }

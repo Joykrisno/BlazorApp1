@@ -16,6 +16,11 @@ namespace BlazorApp1
             builder.Services.AddServerSideBlazor();
             // builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddSingleton<EmpService>();
+            builder.Services.AddHttpClient<IEmpService,EmpService>(client =>
+            {
+                client.BaseAddress = new Uri("http://localhost:5196/");
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

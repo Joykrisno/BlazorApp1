@@ -32,35 +32,36 @@ namespace BusinessLogic
             return data;
         }
 
-        public ResponseModel AddNewEmploye (EmployeInfo Info)
+        public ResponseModel AddNewEmploye(EmployeInfo Info)
         {
+            ResponseModel response = new ResponseModel();
+
             try
             {
-                ResponseModel response = new ResponseModel();
-                var data = _dbContext.EmployeInfos.Where(x => x.Id == Info.Id).FirstOrDefault();
+                var data = _dbContext.EmployeInfos.FirstOrDefault(x => x.Id == Info.Id);
+
                 if (data != null)
                 {
                     data.Name = Info.Name;
                     data.Company = Info.Company;
                     data.YearoffExprience = Info.YearoffExprience;
-                    _dbContext.EmployeInfos.Add(data);
                     _dbContext.SaveChanges();
                 }
 
-
                 response.Status = true;
-                response.Message = "Sucess";
-                return response;
+                response.Message = "Success";
             }
             catch (Exception ex)
             {
-                ResponseModel response = new ResponseModel();
+                // Log the exception
+                // Consider returning a meaningful error message
                 response.Status = false;
-                response.Message = "An error occurred: " + ex.Message;
-                return response;
+                response.Message = "An error occurred while updating the employee.";
             }
-            
+
+            return response;
         }
+
 
         public ResponseModel UpdateEmploye(EmployeInfo Info)
         {
@@ -90,10 +91,7 @@ namespace BusinessLogic
             }
             catch (Exception ex)
             {
-                ResponseModel response = new ResponseModel();
-                response.Status = false;
-                response.Message = "An error occurred: " + ex.Message;
-                return response;
+                throw;
             }
 
         }
@@ -125,10 +123,7 @@ namespace BusinessLogic
             }
             catch (Exception ex)
             {
-                ResponseModel response = new ResponseModel();
-                response.Status = false;
-                response.Message = "An error occurred: " + ex.Message;
-                return response;
+                throw;
             }
 
         }
