@@ -7,6 +7,6 @@ namespace BlazorApp1.Services
         Task<List<Employe>> GetEmployes();
         Task<ResponseModel> AddNewEmploye(Employe employe);
         Task<ResponseModel> UpdateEmployes(Employe employe);
-        Task<ResponseModel> DeleteEmploye(int employeId);
+        Task<ResponseModel> DeleteEmployes(int employeId);
     }
 }

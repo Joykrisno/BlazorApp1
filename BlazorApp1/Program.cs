@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Components.Web;
             builder.Services.AddServerSideBlazor();
             // builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddSingleton<EmpService>();
+
             builder.Services.AddHttpClient<IEmpService,EmpService>(client =>
             {
                 client.BaseAddress = new Uri("http://localhost:5196");

@@ -41,9 +41,9 @@ namespace BlazorApp1.Services
 
 
 
-        public async Task<ResponseModel> DeleteEmploye(int employeId)
+        public async Task<ResponseModel> DeleteEmployes(int employeId)
         {
-            var response = await _httpClient.DeleteAsync($"api/Employe/DeleteEmploye/{employeId}");
+            var response = await _httpClient.DeleteAsync($"api/Employe/DeleteEmployes/{employeId}");
             return await response.Content.ReadFromJsonAsync<ResponseModel>();
         }
 

@@ -4,17 +4,17 @@
 @inject IEmpService empservice;
 @inject IJSRuntime JSRuntime;
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Employe - List</PageTitle>
 <div class="container">
     <EditForm Model="@employe" OnValidSubmit="AddNewEmploye">
         <table class="table table-striped table-bordered">
             <tr>
                 <td>Name</td>
                 <td>Company</td>
-                <td>YearoffExprience</td>
+                <td>Year off Exprience</td>
             </tr>
             <tr>
-                <td>
+                <td style="font-size=23px;">
                     <InputText @bind-Value="employe.Name" class="form-control" />
                 </td>
                 <td>
@@ -23,12 +23,45 @@
                 <td>
                     <InputText @bind-Value="employe.YearoffExprience" class="form-control" />
                 </td>
-                <td>
-                    <button type="submit" class="btn btn-primary">Add</button>
-                </td>
+                 
+                    <button type="submit" class="btn btn-primary">Add</button>               
             </tr>
         </table>
     </EditForm>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Company</th>
+                <th>Year Of Experience</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            
+        </thead>
+        <tbody>
+           @foreach(var (index,emp) in emplist.Select((emp,i) =>(i+1,emp)))
+            {
+                <tr>
+                    <td>@emp.Id</td>
+                    <td><input @bind="emp.Name"></td>
+                   <td><input @bind="emp.Company"></td>
+                    <td><input @bind="emp.YearoffExprience"></td>
+                    <td>
+                        <input type="button" class="btn-primary" name="name" value="Update" @onclick="(()=>updateClick(emp))" />
+                    </td>
+                    <td>
+                        <input type="button" class="btn-primary" name="name" value="Delete" @onclick="(()=>DeleteClick(emp.Id))" />
+                    </td>
+                </tr>
+            }
+
+           
+        </tbody>
+
+    </table>
 </div>
 
 
@@ -37,16 +70,66 @@
 
     private Employe employe = new Employe();
 
+    private List<Employe> emplist = new List<Employe>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetEmployes();
+    }
+
+    private async Task GetEmployes()
+    {
+        emplist = await empservice.GetEmployes();
+        this.StateHasChanged();
+    }
+
     private  async Task AddNewEmploye()
     {
         var response = await empservice.AddNewEmploye(employe);
 
         if (response != null)
         {
+
+            await GetEmployes();
             await customAlert("Employee added successfully");
             employe = new Employe();
+            this.StateHasChanged();
         }
     }
+
+    public async void updateClick(Employe employe)
+    {
+        var response = await empservice.UpdateEmployes(employe);
+        {
+            if (response != null)
+            {
+                await GetEmployes();
+                await customAlert("Employee Update successfully");
+                employe = new Employe();
+                this.StateHasChanged();
+            }
+        }
+    }
+
+
+    public async void DeleteClick(int employeId)
+    {
+        var response = await empservice.DeleteEmployes(employeId);
+        {
+            if (response != null)
+            {
+                await GetEmployes();
+                await customAlert("Employee delete successfully");
+                employe = new Employe();
+                this.StateHasChanged();
+            }
+
+
+        }
+    }
+
+
+
     private async Task customAlert(string message)
     {
         await JSRuntime.InvokeVoidAsync("alert", message);

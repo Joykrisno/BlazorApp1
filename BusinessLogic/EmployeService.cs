@@ -100,7 +100,7 @@ namespace BusinessLogic
                     data.Name = Info.Name;
                     data.Company = Info.Company;
                     data.YearoffExprience = Info.YearoffExprience;
-                    _dbContext.EmployeInfos.Update(data);
+                    _dbContext.EmployeInfos.Update(Info);
                     _dbContext.SaveChanges();
 
                     response.Status = true;
