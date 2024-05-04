@@ -1,4 +1,5 @@
-﻿using DamoModels.Models;
+﻿using BusinessLogic;
+using DamoModels.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,7 +34,7 @@ namespace DamoApi.Controllers
             return Ok(data);
         }
 
- 
+
         [HttpPost]
         [Route("AddNewEmploye")]
         public IActionResult AddNewEmploye(EmployeInfo info)
@@ -44,20 +45,20 @@ namespace DamoApi.Controllers
 
         //[HttpPost]
         //[Route("AddNewEmploye")]
-        //public IActionResult AddNewEmploye()
+        //public IActionResult AddNewEmploye(EmployeInfo Info)
         //{
-        //    var data = employeService.AddNewEmploye();
-        //    return Ok (data);
+        //    var data = employeService.AddNewEmploye(Info);
+        //    return Ok(data);
         //}
 
-        [HttpPut]
-        [Route("UpdateEmploye")]
-        public IActionResult UpdateEmploye()
-        {
-            var data = employeService.UpdateEmploye();
-            return Ok(data);
+        //[HttpPut]
+        //[Route("UpdateEmploye")]
+        //public IActionResult UpdateEmployes()
+        //{
+        //    var data = employeService.UpdateEmploye();
+        //    return Ok(data);
 
-        }
+        //}
 
     }
 }

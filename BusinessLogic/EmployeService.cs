@@ -19,16 +19,7 @@ namespace BusinessLogic
 
         public List<EmployeInfo> GetEmployes()
         {
-            var data = _dbContext.EmployeInfos.ToList();
-            //List<EmployeInfo> employeInfos = new List<EmployeInfo>();
-            //foreach (var c in data)
-            //{
-            //    EmployeInfo employe = new EmployeInfo();
-            //    employe.Id = c.Id;
-            //    employe.Name = c.Name;
-            //    employeInfos.Add(employe);
-
-            //}
+            var data = _dbContext.EmployeInfos.ToList();        
             return data;
         }
 
@@ -63,41 +54,41 @@ namespace BusinessLogic
         }
 
 
-        public ResponseModel UpdateEmploye(EmployeInfo Info)
-        {
-            try
-            {
-                ResponseModel response = new ResponseModel();
-                var data = _dbContext.EmployeInfos.Where(x => x.Id == Info.Id).FirstOrDefault();
-                if (data != null)
-                {
-                    data.Name = Info.Name;
-                    data.Company = Info.Company;
-                    data.YearoffExprience = Info.YearoffExprience;
-                    _dbContext.EmployeInfos.Update(data);
-                    _dbContext.SaveChanges();
+        //public ResponseModel UpdateEmploye(EmployeInfo Info)
+        //{
+        //    try
+        //    {
+        //        ResponseModel response = new ResponseModel();
+        //        var data = _dbContext.EmployeInfos.Where(x => x.Id == Info.Id).FirstOrDefault();
+        //        if (data != null)
+        //        {
+        //            data.Name = Info.Name;
+        //            data.Company = Info.Company;
+        //            data.YearoffExprience = Info.YearoffExprience;
+        //            _dbContext.EmployeInfos.Update(data);
+        //            _dbContext.SaveChanges();
 
-                    response.Status = true;
-                    response.Message = "Sucess";
-                }
+        //            response.Status = true;
+        //            response.Message = "Sucess";
+        //        }
 
-                else
-                {
-                    response.Status = false;
-                    response.Message =  "Employe Not Exit";
-                }
+        //        else
+        //        {
+        //            response.Status = false;
+        //            response.Message =  "Employe Not Exit";
+        //        }
               
-                return response;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+        //        return response;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
 
-        }
+        //}
 
 
-        public ResponseModel DeleteEmploye(int  employeId)
+        public ResponseModel DeleteEmployes(int  employeId)
         {
             try
             {
@@ -128,5 +119,6 @@ namespace BusinessLogic
 
         }
 
+      
     }
 }

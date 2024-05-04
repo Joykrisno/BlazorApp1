@@ -13,9 +13,10 @@ namespace BusinessLogic
 
         List<EmployeInfo> GetEmployes();
 
-        ResponseModel AddNewEmploye(EmployeInfo Info);
-        ResponseModel UpdateEmploye(EmployeInfo Info);
-        ResponseModel DeleteEmploye(int employeId);
+        ResponseModel AddNewEmploye( EmployeInfo Info);
+
+       // ResponseModel UpdateEmploye();
+        ResponseModel DeleteEmployes(int employeId);
 
     }
 }

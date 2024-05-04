@@ -22,7 +22,7 @@ namespace DamoModels.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=JOYMSSQLSERVER01;Database=EmployeDb;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=JOY\\MSSQLSERVER01;Database=EmployeDb;Trusted_Connection=True;");
             }
         }
 

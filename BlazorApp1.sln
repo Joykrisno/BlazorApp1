@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1", "BlazorApp1\BlazorApp1.csproj", "{58B1CBFD-4DF0-404A-BFD6-A16125400AD4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DamoApi", "DamoApi\DamoApi.csproj", "{5AD976AE-1EB7-4756-A7D5-66A3939CCC58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Damo.Api", "DamoApi\Damo.Api.csproj", "{5AD976AE-1EB7-4756-A7D5-66A3939CCC58}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DamoModels", "DamoModels\DamoModels.csproj", "{A4833C9B-AC5D-4B9D-9819-9C106DEA8446}"
 EndProject
