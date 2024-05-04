@@ -23,69 +23,104 @@ namespace BusinessLogic
             return data;
         }
 
-        public ResponseModel AddNewEmploye(EmployeInfo Info)
-        {
-            ResponseModel response = new ResponseModel();
-
-            try
-            {
-                var data = _dbContext.EmployeInfos.FirstOrDefault(x => x.Id == Info.Id);
-
-                if (data != null)
-                {
-                    data.Name = Info.Name;
-                    data.Company = Info.Company;
-                    data.YearoffExprience = Info.YearoffExprience;
-                    _dbContext.SaveChanges();
-                }
-
-                response.Status = true;
-                response.Message = "Success";
-            }
-            catch (Exception ex)
-            {
-                // Log the exception
-                // Consider returning a meaningful error message
-                response.Status = false;
-                response.Message = "An error occurred while updating the employee.";
-            }
-
-            return response;
-        }
-
-
-        //public ResponseModel UpdateEmploye(EmployeInfo Info)
+        //public ResponseModel AddNewEmploye(EmployeInfo Info)
         //{
+        //    ResponseModel response = new ResponseModel();
+
         //    try
         //    {
-        //        ResponseModel response = new ResponseModel();
-        //        var data = _dbContext.EmployeInfos.Where(x => x.Id == Info.Id).FirstOrDefault();
+        //        var data = _dbContext.EmployeInfos.FirstOrDefault(x => x.Id == Info.Id);
+
         //        if (data != null)
         //        {
         //            data.Name = Info.Name;
         //            data.Company = Info.Company;
         //            data.YearoffExprience = Info.YearoffExprience;
-        //            _dbContext.EmployeInfos.Update(data);
         //            _dbContext.SaveChanges();
-
-        //            response.Status = true;
-        //            response.Message = "Sucess";
         //        }
 
-        //        else
-        //        {
-        //            response.Status = false;
-        //            response.Message =  "Employe Not Exit";
-        //        }
-              
-        //        return response;
+        //        response.Status = true;
+        //        response.Message = "Success";
         //    }
         //    catch (Exception ex)
         //    {
-        //        throw;
+        //        // Log the exception
+        //        // Consider returning a meaningful error message
+        //        response.Status = false;
+        //        response.Message = "An error occurred while updating the employee.";
         //    }
 
+        //    return response;
         //}
+
+
+
+        public ResponseModel AddNewEmploye(EmployeInfo Info)
+        {
+            try
+            {
+                ResponseModel response = new ResponseModel();
+                var data = _dbContext.EmployeInfos.Where(x => x.Id == Info.Id).FirstOrDefault();
+                if (data == null)
+                {
+                    //data.Name = Info.Name;
+                    //data.Company = Info.Company;
+                    //data.YearoffExprience = Info.YearoffExprience;
+                    _dbContext.EmployeInfos.Add(Info);
+                    _dbContext.SaveChanges();
+
+                    response.Status = true;
+                    response.Message = "Sucess";
+                }
+
+                else
+                {
+                    response.Status = false;
+                    response.Message = "Employe Not Exit";
+                }
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+
+        public ResponseModel UpdateEmploye(EmployeInfo Info)
+        {
+            try
+            {
+                ResponseModel response = new ResponseModel();
+                var data = _dbContext.EmployeInfos.Where(x => x.Id == Info.Id).FirstOrDefault();
+                if (data != null)
+                {
+                    data.Name = Info.Name;
+                    data.Company = Info.Company;
+                    data.YearoffExprience = Info.YearoffExprience;
+                    _dbContext.EmployeInfos.Update(data);
+                    _dbContext.SaveChanges();
+
+                    response.Status = true;
+                    response.Message = "Sucess";
+                }
+
+                else
+                {
+                    response.Status = false;
+                    response.Message = "Employe Not Exit";
+                }
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
 
 
         public ResponseModel DeleteEmployes(int  employeId)

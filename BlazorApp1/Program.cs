@@ -3,12 +3,7 @@ using BlazorApp1.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace BlazorApp1
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -18,7 +13,7 @@ namespace BlazorApp1
             builder.Services.AddSingleton<EmpService>();
             builder.Services.AddHttpClient<IEmpService,EmpService>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:5196/api/");
+                client.BaseAddress = new Uri("http://localhost:5196");
             });
 
             var app = builder.Build();
@@ -38,6 +33,3 @@ namespace BlazorApp1
             app.MapFallbackToPage("/_Host");
 
             app.Run();
-        }
-    }
-}

@@ -18,5 +18,6 @@ namespace BusinessLogic
        // ResponseModel UpdateEmploye();
         ResponseModel DeleteEmployes(int employeId);
 
+
     }
 }

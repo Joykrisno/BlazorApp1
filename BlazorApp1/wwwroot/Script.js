@@ -1,6 +1,4 @@
-﻿window.alert = function (message)
-
-{
+﻿ 
+window.customAlert = function (message) {
     alert(message);
-
 }

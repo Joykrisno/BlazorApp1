@@ -30,7 +30,7 @@ namespace DamoModels.Models
         {
             modelBuilder.Entity<EmployeInfo>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.Id); // Define Id as the primary key
 
                 entity.ToTable("EmployeInfo");
 
@@ -38,7 +38,7 @@ namespace DamoModels.Models
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd(); // Configure Id as auto-generated
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(200)
@@ -52,6 +52,9 @@ namespace DamoModels.Models
             OnModelCreatingPartial(modelBuilder);
         }
 
+
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+
     }
 }

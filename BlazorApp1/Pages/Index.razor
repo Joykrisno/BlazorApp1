@@ -6,12 +6,12 @@
 
 <PageTitle>Index</PageTitle>
 <div class="container">
-    <EditForm Model="@employe">
+    <EditForm Model="@employe" OnValidSubmit="AddNewEmploye">
         <table class="table table-striped table-bordered">
             <tr>
                 <td>Name</td>
                 <td>Company</td>
-                <td>YearoffExprience</td>          
+                <td>YearoffExprience</td>
             </tr>
             <tr>
                 <td>
@@ -24,7 +24,7 @@
                     <InputText @bind-Value="employe.YearoffExprience" class="form-control" />
                 </td>
                 <td>
-                    <input type="button" class="btn btn-primary" value="Add" @onclick="AddNewEmploye" />
+                    <button type="submit" class="btn btn-primary">Add</button>
                 </td>
             </tr>
         </table>
@@ -32,25 +32,23 @@
 </div>
 
 
-@code{
+
+@code {
 
     private Employe employe = new Employe();
 
-    public async void AddNewEmploye()
+    private  async Task AddNewEmploye()
     {
         var response = await empservice.AddNewEmploye(employe);
 
-        if(response !=null)
+        if (response != null)
         {
-            await alert("Employe Add Successfully");
+            await customAlert("Employee added successfully");
+            employe = new Employe();
         }
-
-
-     
     }
-
-    private async Task alert(string Message)
+    private async Task customAlert(string message)
     {
-        await JSRuntime.InvokeAsync<object>("alert", Message);
+        await JSRuntime.InvokeVoidAsync("alert", message);
     }
 }
